@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof register !== 'undefined' && register ? 'Registro' : 'Login' %></title>
+
+<!-- Y para los mensajes de error: -->
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert error"><%= error %></div>
+<% } %>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1><%= register ? 'Registro de Usuario' : 'Iniciar Sesión' %></h1>
+    
+    <% if (error) { %>
+      <div class="alert error"><%= error %></div>
+    <% } %>
+    
+    <form action="<%= register ? '/register' : '/login' %>" method="POST">
+      <div class="form-group">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      
+      <% if (register) { %>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      <% } %>
+      
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      
+      <button type="submit"><%= register ? 'Registrarse' : 'Ingresar' %></button>
+    </form>
+    
+    <% if (register) { %>
+      <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+    <% } else { %>
+      <p>¿No tienes cuenta? <a href="/register">Regístrate</a></p>
+    <% } %>
+  </div>
+</body>
+</html>
